@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: reshape_long
+# key: rl
+# --
+reshape long ${1:price quantity}, j(${2:year}) i(${3:pc01_state_id pc01_village_id})
+$0

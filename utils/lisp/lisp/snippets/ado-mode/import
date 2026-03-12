@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: import delimited
+# key: import
+# --
+import delimited using ${1:filename.csv}, clear
+$0

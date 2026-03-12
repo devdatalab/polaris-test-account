@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: etag
+# key: etag
+# --
+egen ${1:tagname} = tag(${2:varlist})

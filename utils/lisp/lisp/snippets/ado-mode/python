@@ -1,0 +1,6 @@
+# key: python
+# name: python
+# --
+/* run external python script */
+python script "${1:$tmp/example.py}", args("${2:optional arguments}") userpaths(${3:~/optional_file_path}, prepend)
+$0

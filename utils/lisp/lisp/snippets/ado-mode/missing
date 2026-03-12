@@ -1,0 +1,4 @@
+# key: mi
+# name: missing
+# --
+mi(${1:})$0

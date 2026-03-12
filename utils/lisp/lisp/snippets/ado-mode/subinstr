@@ -1,0 +1,4 @@
+# key: subinstr
+# name: subinstr
+# --
+subinstr(${1:varname}, ${2:searchstr}, ${3:replacestr}, .)

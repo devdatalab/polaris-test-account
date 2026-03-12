@@ -1,0 +1,11 @@
+# key: progdef
+# name: stata-stub-program
+# --
+/**${1:$(make-string (string-width yas-text) ?\*)}************${2:$(make-string (string-width yas-text) ?\*)}**/
+/* program ${1:progname}: ${2:description}   */
+/**${1:$(make-string (string-width yas-text) ?\*)}************${2:$(make-string (string-width yas-text) ?\*)}**/
+cap prog drop $1
+prog def $1
+  $0
+end
+/** END program $1 ${2:$(make-string (string-width yas-text) ?\*)}/

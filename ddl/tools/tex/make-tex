@@ -1,0 +1,89 @@
+#!/bin/sh
+
+# FORKED FROM PRIMARY DDL MAKE-TEX FOR REPLICATION REPO & TEST ACCOUNT ONLY
+# MAINTAINED SEPARATELY IN TOOLS/TEST_ACCOUNT/
+
+# strip the extension and folder part from $1
+filename=$(basename "$1")
+
+date
+echo "MAKE: COMPILING $filename"
+
+echo "Checking for bib replacement script"
+if [ -f bib-replace.sh ] ; then
+    echo "bib-replace.sh was found. Running it..."
+    ./bib-replace.sh
+else
+    echo "bib-replace.sh not found."
+fi
+
+# assumes output-file.txt has the format: [tex_filename],[new_filename]
+newfile=''
+if [ -f "output-file.txt" ]; then
+
+    # ensure only one matching line
+    line_count=`grep "^mortality," output-file.txt | wc | tr -s ' ' | cut -d" " -f2`
+    if [ "$line_count" -eq "1" ]; then
+       newfile=`grep "^$filename," output-file.txt | cut -d"," -f2`
+       echo "Setting output file to $newfile.pdf"
+    else
+	echo "Multiple matching keys found. Not replacing filename."
+    fi
+fi
+
+# replace with original if this is a blank string
+if [[ -z  $newfile ]]; then
+    echo "No filename replacement found."
+    newfile="$filename"
+fi
+
+mkdir foo
+#cp $filename.tex foo
+cp *.tex *.cls *.bib *.bst *.bbl *.blg *.sty *.png *.pdf *.eps foo
+cp -R exhibits foo
+cp -R figs foo
+cp -R tables foo
+cp -R img foo
+cd foo
+
+echo "MAKE: FIRST LATEX RUN"
+pdflatex $filename -draftmode -interaction=nonstopmode   <~/iec/output/S
+
+echo "MAKE: RUNNING BIBTEX"
+bibtex $filename
+
+# now two pdflatex runs and see what happens
+echo "MAKE: 2ND LATEX RUN"
+pdflatex $filename -draftmode -interaction=nonstopmode  <~/iec/output/S
+
+echo "MAKE: 3RD LATEX RUN"
+pdflatex $filename -interaction=nonstopmode   <~/iec/output/S
+
+echo "MAKE: COPYING FILE"
+
+# get username for target pdf path
+USER=`whoami`
+
+echo "Writing ~/iec/output/pdf/$USER/$newfile.pdf ..."
+cp $filename.pdf ~/iec/output/pdf/$USER
+cp $filename.pdf ~/iec/output/pdf/$USER/$newfile.pdf
+
+# if we're on the RC, copy the pdf to the public_html folder as well and provide a link there
+if [ "$HOSTNAME" = "polaris8.dartmouth.edu" ] ||  [ "$HOSTNAME" = "andes8.dartmouth.edu" ] ||  [ "$HOSTNAME" = "polaris.dartmouth.edu" ] ||  [ "$HOSTNAME" = "polaris-old.dartmouth.edu" ] ||  [ "$HOSTNAME" = "andes.dartmouth.edu" ]  ||  [[ "$HOSTNAME" == *"hpcc"* ]] || [[ "$HOSTNAME" == "slurm"* ]]
+then
+
+  cp $filename.pdf ~/public_html/pdf/$newfile.pdf
+  echo "Web link to file: https://rcweb.dartmouth.edu/~$USER/pdf/$newfile.pdf"
+
+  # if the target page is set, provide another link to the target page
+  if [ ! -z "$TEXTARGETPAGE" ]
+  then
+    echo "Page link to file: https://rcweb.dartmouth.edu/IEC/$USER/pdf/$newfile.pdf#page=$TEXTARGETPAGE"
+  fi
+fi
+
+date
+
+
+cd ..
+rm -rf foo

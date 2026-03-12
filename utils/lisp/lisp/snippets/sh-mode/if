@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: if
+# key: if
+# --
+if [ ${1:"$VAR1" == "$VAR2"} ]; then
+    ${2:echo "TRUE"}$0
+fi

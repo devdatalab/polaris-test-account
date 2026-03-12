@@ -1,0 +1,17 @@
+# -*- mode: snippet -*-
+# key : figure
+# group: environments
+# name : \begin{figure} ... \end{figure}
+# --
+\begin{figure}[H]
+  \caption{${1:caption}} 
+
+  \begin{center}
+    \resizebox{\linewidth}{!}{\includegraphics{${2:\path/figure_file}}}
+  \end{center}
+  \begin{adjustwidth}{2cm}{2cm}
+    \footnotesize
+    Figure~\ref{fig:${3:fig_key}} $0
+  \end{adjustwidth}
+  \label{fig:$3}
+\end{figure}

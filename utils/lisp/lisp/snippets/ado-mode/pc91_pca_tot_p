@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: pc91_pca_tot_p
+# key: pop91
+# --
+pc91_pca_tot_p $0

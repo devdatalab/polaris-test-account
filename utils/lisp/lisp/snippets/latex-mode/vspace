@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: vspace
+# key: vs
+# key: vspace
+# --
+\vspace{${1:1cm}}

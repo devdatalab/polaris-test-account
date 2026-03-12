@@ -1,0 +1,5 @@
+# key: regexr
+# name: regexr
+# --
+regexr(${1:varname}, "${2:regex}", "${3:replacement}")
+$0

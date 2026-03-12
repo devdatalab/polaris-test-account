@@ -1,0 +1,16 @@
+# -*- mode: snippet -*-
+# key: table
+# group: environments
+# name : \begin{table} ... \end{table}
+# --
+\begin{table}[H]
+  \caption{${1:caption}} 
+
+  \begin{center}
+    \footnotesize{\input{${2:\path/table_file}}}
+  \end{center}
+  \footnotesize
+  Table~\ref{tab:${3:table_key}} $0
+
+  \label{tab:$3}
+\end{table}

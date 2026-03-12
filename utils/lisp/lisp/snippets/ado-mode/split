@@ -1,0 +1,5 @@
+# key: split
+# name: split
+# --
+split ${1:vars}, gen(${2:stub}) ${3:parse(,)}
+$0

@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: regexm
+# key: regexm
+# --
+regexm(${1:var}, "${2:[0-9]+_[0-9]}")$0
+

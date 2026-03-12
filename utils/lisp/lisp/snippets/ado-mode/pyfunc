@@ -1,0 +1,6 @@
+# key: pyfunc
+# name: pyfunc
+# --
+/* run the python "${1:funcname}" function */
+pyfunc $1(${2:function_args}), import("${3:optional - import string e.g. from foo import bar}") function_path("${4:optional - function import location)"}
+$0

@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: import excel
+# key: importexcel
+# --
+import excel using ${1:filename.xlsx}, ${firstrow} clear
+$0

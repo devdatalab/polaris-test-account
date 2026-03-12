@@ -1,0 +1,10 @@
+# -*- mode: snippet -*-
+# name: levelsof
+# key: levelsof
+# --
+/* ${4:loop over all values of $1} */
+levelsof ${1:var}, local(${2:values})
+foreach ${3:value} in $2 {
+
+  $0
+}

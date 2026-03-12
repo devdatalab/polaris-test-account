@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: pc11_pca_tot_p
+# key: pop11
+# --
+pc11_pca_tot_p $0

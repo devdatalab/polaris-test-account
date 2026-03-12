@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: stata-quotes
+# key: qq
+# --
+`"$0"'

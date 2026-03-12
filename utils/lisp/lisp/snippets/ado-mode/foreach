@@ -1,0 +1,9 @@
+# -*- mode: snippet -*-
+# name: foreach
+# key: for
+# --
+/* loop over ${1:something} */
+foreach ${2:var} in ${3:list} {
+
+  $0
+}

@@ -1,0 +1,4 @@
+# key: ecut
+# name: egen-cut
+# --
+egen ${1:varname} = cut(${2:varname}), ${3:at(a(b)c)}

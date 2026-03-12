@@ -1,0 +1,270 @@
+| SECTION 1: NAVIGATION AND EDITING
+| 
+-----------------------------------------------------------------------
+
+Put an X at the end of this line.
+
+-----------------------------------------------------------------------
+| 
+| (i) Erase everything after the words "law firm of" in the first line
+|     only:
+-----------------------------------------------------------------------
+
+The letter was from the law firm of Warpe, Wist-full, Kubitschek and
+McMingus, of Los Angeles, and signed by somebody named Metzger.
+
+-----------------------------------------------------------------------
+|
+| (ii) Transpose the words "spring the" -> "the spring":
+-----------------------------------------------------------------------
+
+It said Pierce had died back in spring the.
+
+-----------------------------------------------------------------------
+| 
+| (iii) Go back to the first page of this document and uppercase the
+|       name "Oedipa".
+|
+-----------------------------------------------------------------------
+| 
+| (iv) Uppercase the following sixteen words:
+-----------------------------------------------------------------------
+
+Oedipa, had been named executor, or she supposed executrix, of the
+estate of one Pierce Inverarity.
+
+-----------------------------------------------------------------------
+|
+| (v) Delete the first four words of the following sentence (and the
+|     space after them):
+-----------------------------------------------------------------------
+
+These word be deleted Through the rest of the afternoon, through her trip to the market in downtown Kinneret-Among-The-Pines to buy ricotta
+
+-----------------------------------------------------------------------
+|
+| (vi) Move the sentence chunk "She tried to think back" to the front of
+|      this sentence from the end:
+-----------------------------------------------------------------------
+
+to whether anything unusual had happened around then. She tried to think back 
+
+-----------------------------------------------------------------------
+|
+| (vii) Remember those four words you cut in step (v)? Paste them in
+|       the center of this box:
+-----------------------------------------------------------------------
+
+
+
+-----------------------------------------------------------------------
+|
+| (vii) Find a way to remember this spot in the document. I'll tell
+|       you what text to place here further down.
+-----------------------------------------------------------------------
+
+
+
+-----------------------------------------------------------------------
+| 
+| SECTION 2: RECTANGULAR EDITING
+| 
+| (i) Remove the numbers from this list so there are no numbers and no
+|     whitespace at the beginning of each line:
+-----------------------------------------------------------------------
+
+ 1. I
+ 2. think
+ 3. it's
+ 4. time
+ 5. Wendell
+ 6. Maas
+ 7. had
+ 8. a
+ 9. little
+10. visit
+11. from
+12. The
+13. Shadow.
+
+-----------------------------------------------------------------------
+|
+| (ii) comment out the following 11 lines using C++ style comments
+|      (i.e. insert "// " in front of each line). (Note: this is preferable
+|      to using /* */, because the latter can fail with nested comments and
+|      is visually harder to identify comment lines.)
+-----------------------------------------------------------------------
+
+/* manually create birth cohort groups -- 5 years for recent period, ten for way back */
+cap drop bc
+gen bc = .
+replace bc = 1950 if inrange(birth_year, 1950, 1959)
+replace bc = 1960 if inrange(birth_year, 1960, 1969)
+replace bc = 1970 if inrange(birth_year, 1970, 1974)
+replace bc = 1975 if inrange(birth_year, 1975, 1979)
+replace bc = 1980 if inrange(birth_year, 1980, 1984)
+replace bc = 1985 if inrange(birth_year, 1985, 1989)
+
+rerank, by(bc)
+
+-----------------------------------------------------------------------
+|
+| (iii) [ninja-level] This list is out of order. Leave the list content in
+|       the same order but renumber it with sequential numbers from 1 to 11.
+-----------------------------------------------------------------------
+
+123. That
+25. phone
+7. line
+6. could
+5. have
+4. pointed
+23. any
+3. direction,
+9. been
+12. any
+11. length.
+
+-----------------------------------------------------------------------
+| 
+| (iv)  add the option "msize(vtiny)" to each of these subgraphs. (i.e. add
+|       ", msize(vtiny)" after the x, inside the parentheses of each line.
+-----------------------------------------------------------------------
+
+twoway ///
+    (scatter py1 x) ///
+    (scatter py2 x) ///
+    (scatter py3 x) ///
+    (scatter py4 x) ///
+    (scatter py5 x) ///
+    (scatter py6 x) ///
+    (scatter py7 x)
+
+-----------------------------------------------------------------------
+| (v) Remember that spot I asked you to remember up above? Copy the
+|     sentence below this statement and paste it in the middle of the
+|     box below your bookmark.
+-----------------------------------------------------------------------
+
+Yet at least he had believed in the cars. Maybe to excess.
+
+-----------------------------------------------------------------------
+| 
+| 
+| SECTION 3: REPLACEMENTS AND MACROS
+| 
+| (i) Duplicate each word in this list, separating with a space. i.e. "one"
+|     should become "one one"
+-----------------------------------------------------------------------
+
+one
+two
+three
+four
+five
+six
+seven
+eight
+nine
+ten
+eleven
+twelve
+thirteen
+fourteen
+fifteen
+sixteen
+seventeen
+eighteen
+nineteen
+twenty
+
+-----------------------------------------------------------------------
+|
+| (ii) We took output from a Stata list and started to transform it into a
+|      set of replace commands. But there are some bugs. Remove the
+|      whitespace from the end of each replacement string, and put in the
+|      missing double quote at the end of each line.
+-----------------------------------------------------------------------
+
+replace master = "town e port blair                  " if master == "port blair
+replace master = "vijayawadacorp   " if master == "vijayawada
+replace master = "palasakasibugga            " if master == "palasa kasibugga
+replace master = "changlang nt town" if master == "changlang
+replace master = "guwahati"  if master == "guwahaticorp
+replace master = "sivasagar    " if master == "sibsagar
+
+-----------------------------------------------------------------------
+|
+| (iii) Erase the third word from each of the following lines. (use a macro!)
+-----------------------------------------------------------------------
+
+For a couple years he'd been a used car salesman and so hyperaware of
+what that profession had come to mean that working hours were
+Exquisite torture to him. Mucho shaved his upper lip every morning
+three times against the grain to remove any remotest
+breath of a moustache, new blades he drew blood invariably but kept at
+it; bought all natural-shoulder suits, then went to a tailor to have
+the lapels made yet more abnormally narrow, on his hair used only
+water, combing it like Jack Lemmon to throw them further off.
+The sight of sawdust, even pencil shavings, made him wince, his own kind
+being known to use it for hushing sick transmissions, and though he
+dieted he could still not as Oedipa did use honey to sweeten his
+coffee for like all things viscous it distressed him, recalling too
+poignantly what is often mixed with motor oil to ooze dishonest into
+gaps between piston and cylinder wall.
+
+-----------------------------------------------------------------------
+| 
+| SECTION 4: SPECIAL MODES AND KEY BINDINGS
+| 
+| For this section I will be asking you to enter the key bindings that
+| do certain things or enter certain modes. Just enter the key binding
+| with no additional whitespace between the dashed lines. Blank
+| questions in this part only cost you 8 seconds.
+| 
+| (i) What is the key binding to enter dired-mode?
+-----------------------------------------------------------------------
+
+-----------------------------------------------------------------------
+| 
+| (ii) What key binding shows the master list of all open buffers?
+-----------------------------------------------------------------------
+
+-----------------------------------------------------------------------
+| 
+| (iii) What key binding aligns all the columns of an open CSV file?
+-----------------------------------------------------------------------
+
+-----------------------------------------------------------------------
+| 
+| (iv) What key binding moves back one word
+-----------------------------------------------------------------------
+
+-----------------------------------------------------------------------
+| 
+| (v) What key binding moves forward one word?
+-----------------------------------------------------------------------
+
+-----------------------------------------------------------------------
+| 
+| (vi) What key binding splits the screen vertically?
+-----------------------------------------------------------------------
+
+-----------------------------------------------------------------------
+|
+| (vii) What key binding (or M-command) lets you cycle back through
+|       your recent marks (i.e. walks you back through the places you've
+|       recently been in your document?
+-----------------------------------------------------------------------
+
+-----------------------------------------------------------------------
+|
+| (vii) If your cursor is on an open parenthesis or brace, what key
+|       binding finds the matching close paren or brace?
+-----------------------------------------------------------------------
+
+-----------------------------------------------------------------------
+|
+| You made it to the end! Run the command M-x ddl-emacs-challenge-done.
+|
+-----------------------------------------------------------------------

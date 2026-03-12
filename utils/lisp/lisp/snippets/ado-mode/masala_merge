@@ -1,0 +1,5 @@
+# key: mm
+# name: masala_merge
+# --
+masala_merge ${1:pc01_state_id pc01_district_id} using ${2:filename}, s(${3:fuzzyvar}) outfile(${4:$tmp/outfile})
+$0

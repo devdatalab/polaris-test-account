@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: table_from_tpl
+# key: tablefromtpl
+# --
+table_from_tpl, t(${1:tplfile}) r(${2:csv}) o(\$out/${3:outputtex})
+$0

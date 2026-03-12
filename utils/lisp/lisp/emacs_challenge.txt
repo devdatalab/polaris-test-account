@@ -1,0 +1,52 @@
+| This is the emacs challenge.
+| 
+| The timer has not started yet. This section tells you how the challenge
+| works and has some sample questions. 
+| 
+| When you begin the challenge, new content will appear and the timer will begin.
+| 
+| The challenge is a text file with instructions and content. Instructions
+| are lines like this with a pipe in front of them. Answer spaces are
+| sections without the leading pipes. Don't make changes to any lines
+| like these with leading pipes.
+| 
+| You may have noticed that the arrow keys don't work for cursor
+| navigation. That's intentional-- don't use the arrow keys! If you
+| haven't already, then take a few minutes to get used to Unix's
+| faster navigation keys before you start:
+| 
+| C-p: Line up
+| C-n: Line down
+| C-f: Forward character
+| C-b: Backward character
+| 
+| (Bonus: all of these have useful modifiers, like M-f (forward-word),
+| or C-M-n (find matching parenthesis).)
+| 
+| Here is a sample challenge question:
+| 
+| (x) Fix the spelling mistake in the following line (rgeenish->greenish):
+-----------------------------------------------------------------------
+Oedipa stood in the living room, stared at by the rgeenish dead eye of
+the TV tube.
+-----------------------------------------------------------------------
+|
+| When you write the actual challenge, you should fix the spelling mistake
+| inline. When you get to the end of the challenge, the instructions will
+| ask you to run the command M-x ddl-emacs-challenge-done. You will be
+| given a time and your work will be stored. We don't have fully
+| automated work checking yet so I (Paul) will do the calculation
+| semi-manually. Try not to put in additional whitespace and avoid
+| editing any of the instruction lines.
+|
+| Every question here has a tool or shortcut that you can use to
+| answer it. If the only way you can see to answer a question is by
+| doing a whole lot of manual editing, just skip the question. This is
+| an emacs wizardry challenge, not a typing speed challenge. 20 seconds
+| will be added to the challenge time for each section left blank.
+| 
+| That's all there is to it. Run the command M-x ddl-emacs-challenge-start in
+| order to begin --- the full challenge will then appear below. (i.e. Press Alt-X
+| and then the command. You'll need to do this again at the end to finish the
+| challenge.)
+| 

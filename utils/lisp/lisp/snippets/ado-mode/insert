@@ -1,0 +1,5 @@
+# key: insert
+# name: insert
+# --
+insert_into_file using ${1:filename}, key(${2:key}) val(${3:value})
+$0

@@ -1,0 +1,10 @@
+# -*- mode: snippet -*-
+# name: local file list
+# key: localfiles
+# --
+/* loop over ${1:WHAT?} */
+local ${2:filelist}: dir "${3:/folder/path}" files "${4:glob*.csv*}"
+foreach file in `$2' {
+
+  $0
+}

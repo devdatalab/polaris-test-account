@@ -1,0 +1,4 @@
+# key: strfix
+# name: str_fix
+# --
+str_fix ${1:varname} using ${2:filename.txt}, replace key(${3:pc01_state_id con_name})

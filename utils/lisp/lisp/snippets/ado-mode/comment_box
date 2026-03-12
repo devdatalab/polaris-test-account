@@ -1,0 +1,8 @@
+# key: cb
+# name: stata-comment-box
+# binding: [3 2]
+# --
+/**${1:$(make-string (string-width yas-text) ?\*)}**/
+/* ${1:} */
+/**${1:$(make-string (string-width yas-text) ?\*)}**/
+$0

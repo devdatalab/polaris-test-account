@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: save
+# key: save
+# --
+save ${1:filename}, replace
+$0

@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: strpos
+# key: strpos
+# --
+strpos(${1:haystack}, ${2:needle})$0
