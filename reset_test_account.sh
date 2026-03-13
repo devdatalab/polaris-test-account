@@ -84,14 +84,11 @@ cp -r "$CONFIG_DIR/utils"         "$HOME/utils"
 cp -r "$CONFIG_DIR/iec"           "$HOME/iec"
 
 # ---------- remove the config repo clone ----------
-echo "Removing config repo clone at $HOME_REAL/$CONFIG_TOPLEVEL ..."
-cd "$HOME"
-rm -rf "$HOME_REAL/$CONFIG_TOPLEVEL" 2>/dev/null
-# retry after brief delay if network filesystem hasn't caught up
-if [ -d "$HOME_REAL/$CONFIG_TOPLEVEL" ]; then
-    sleep 2
-    rm -rf "$HOME_REAL/$CONFIG_TOPLEVEL" 2>/dev/null || true
-fi
+# remove config repo contents (the directory itself can't be removed
+# while the parent shell's cwd is inside it)
+echo "Removing config repo contents ..."
+rm -rf "$HOME_REAL/$CONFIG_TOPLEVEL"/* "$HOME_REAL/$CONFIG_TOPLEVEL"/.* 2>/dev/null || true
 
+echo ""
 echo "Done. Test account $TEST_USER has been reset."
-echo "Run 'cd ~ && rmdir ~/polaris-test-account' to clean up."
+echo "Run 'cd ~ && rmdir ~/$CONFIG_TOPLEVEL' to remove the empty repo directory."
