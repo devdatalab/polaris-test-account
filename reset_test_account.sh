@@ -86,6 +86,11 @@ cp -r "$CONFIG_DIR/iec"           "$HOME/iec"
 # ---------- remove the config repo clone ----------
 echo "Removing config repo clone at $HOME_REAL/$CONFIG_TOPLEVEL ..."
 cd "$HOME"
-rm -rf "$HOME_REAL/$CONFIG_TOPLEVEL"
+rm -rf "$HOME_REAL/$CONFIG_TOPLEVEL" 2>/dev/null
+# retry after brief delay if network filesystem hasn't caught up
+if [ -d "$HOME_REAL/$CONFIG_TOPLEVEL" ]; then
+    sleep 2
+    rm -rf "$HOME_REAL/$CONFIG_TOPLEVEL" 2>/dev/null || true
+fi
 
 echo "Done. Test account $TEST_USER has been reset."
