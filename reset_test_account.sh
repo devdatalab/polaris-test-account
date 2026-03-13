@@ -3,7 +3,7 @@
 # reset_test_account.sh
 # Wipes the test account home directory and restores minimal base configs
 # for replicating data pipelines without standard team configurations.
-# Run this script as the test account user from within the cloned config repo.
+# Clone polaris-test-account to $HOME, then run this script as the test account user.
 
 set -euo pipefail
 
@@ -18,6 +18,15 @@ if [ "$CURRENT_USER" != "$TEST_USER" ]; then
     exit 1
 fi
 
+# ---------- check repo location ----------
+HOME_REAL="$(realpath "$HOME")"
+CONFIG_DIR_PARENT="$(dirname "$CONFIG_DIR")"
+if [ "$CONFIG_DIR_PARENT" != "$HOME_REAL" ]; then
+    echo "ERROR: polaris-test-account must be cloned directly into \$HOME ($HOME_REAL)"
+    echo "       Found at: $CONFIG_DIR"
+    exit 1
+fi
+
 # ---------- safety prompt ----------
 echo "This will WIPE everything in $HOME and restore base configs."
 read -rp "Are you sure? (yes/no): " CONFIRM
@@ -29,25 +38,17 @@ fi
 # ---------- wipe home directory ----------
 echo "Wiping $HOME ..."
 
-# resolve $HOME to its real path to avoid symlink mismatches with pwd
-HOME_REAL="$(realpath "$HOME")"
-CONFIG_RELPATH="${CONFIG_DIR#"$HOME_REAL"/}"
-CONFIG_TOPLEVEL="${CONFIG_RELPATH%%/*}"
+REPO_NAME="$(basename "$CONFIG_DIR")"
 
-echo "  HOME_REAL=$HOME_REAL"
-echo "  CONFIG_DIR=$CONFIG_DIR"
-echo "  CONFIG_TOPLEVEL=$HOME_REAL/$CONFIG_TOPLEVEL"
-
-# delete everything in home except the config repo's top-level ancestor,
-# and public_html (preserved with empty pdf/ and png/ dirs)
+# delete everything in $HOME except the config repo and public_html
 for item in "$HOME_REAL"/* "$HOME_REAL"/.*; do
     name="$(basename "$item")"
 
     # skip . and ..
     [ "$name" = "." ] || [ "$name" = ".." ] && continue
 
-    # skip config repo and public_html
-    [ "$name" = "$CONFIG_TOPLEVEL" ] && echo "  keeping $item (config repo)" && continue
+    # skip config repo (need it for copying) and public_html
+    [ "$name" = "$REPO_NAME" ] && echo "  keeping $item (config repo)" && continue
     [ "$name" = "public_html" ] && echo "  keeping $item (public_html)" && continue
 
     echo "  removing $item"
@@ -83,12 +84,14 @@ cp -r "$CONFIG_DIR/texmf"         "$HOME/texmf"
 cp -r "$CONFIG_DIR/utils"         "$HOME/utils"
 cp -r "$CONFIG_DIR/iec"           "$HOME/iec"
 
+# ddl/tools/
+mkdir -p "$HOME/ddl"
+cp -r "$CONFIG_DIR/ddl/tools"     "$HOME/ddl/tools"
+
 # ---------- remove the config repo clone ----------
-# remove config repo contents (the directory itself can't be removed
-# while the parent shell's cwd is inside it)
 echo "Removing config repo contents ..."
-rm -rf "$HOME_REAL/$CONFIG_TOPLEVEL"/* "$HOME_REAL/$CONFIG_TOPLEVEL"/.* 2>/dev/null || true
+rm -rf "$CONFIG_DIR"/* "$CONFIG_DIR"/.* 2>/dev/null || true
 
 echo ""
 echo "Done. Test account $TEST_USER has been reset."
-echo "Run 'cd ~ && rmdir ~/$CONFIG_TOPLEVEL' to remove the empty repo directory."
+echo "Run 'cd ~ && rmdir ~/$REPO_NAME' to remove the empty repo directory."
