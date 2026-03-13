@@ -9,7 +9,7 @@ set -euo pipefail
 
 # ---------- configuration ----------
 TEST_USER="f004qzy"
-CONFIG_DIR="$(cd "$(dirname "$0")" && pwd)"
+CONFIG_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # ---------- confirm user ----------
 CURRENT_USER=$(whoami)
@@ -29,28 +29,42 @@ fi
 # ---------- wipe home directory ----------
 echo "Wiping $HOME ..."
 
-# find the top-level directory under $HOME that contains the config repo,
-# so we can exclude it from the wipe (we still need to copy from it)
-CONFIG_RELPATH="${CONFIG_DIR#"$HOME"/}"
-CONFIG_TOPLEVEL="$HOME/${CONFIG_RELPATH%%/*}"
+# resolve $HOME to its real path to avoid symlink mismatches with pwd
+HOME_REAL="$(realpath "$HOME")"
+CONFIG_RELPATH="${CONFIG_DIR#"$HOME_REAL"/}"
+CONFIG_TOPLEVEL="${CONFIG_RELPATH%%/*}"
+
+echo "  HOME_REAL=$HOME_REAL"
+echo "  CONFIG_DIR=$CONFIG_DIR"
+echo "  CONFIG_TOPLEVEL=$HOME_REAL/$CONFIG_TOPLEVEL"
 
 # delete everything in home except the config repo's top-level ancestor,
-# public_html (preserved with empty PDF/ and PNG/ dirs), and iec/
-find "$HOME" -mindepth 1 -maxdepth 1 \
-    -not -path "$CONFIG_TOPLEVEL" \
-    -not -name "public_html" \
-    -exec rm -rf {} +
+# and public_html (preserved with empty pdf/ and png/ dirs)
+for item in "$HOME_REAL"/* "$HOME_REAL"/.*; do
+    name="$(basename "$item")"
 
-# wipe public_html contents but keep PDF/ and PNG/ as empty directories
+    # skip . and ..
+    [ "$name" = "." ] || [ "$name" = ".." ] && continue
+
+    # skip config repo and public_html
+    [ "$name" = "$CONFIG_TOPLEVEL" ] && echo "  keeping $item (config repo)" && continue
+    [ "$name" = "public_html" ] && echo "  keeping $item (public_html)" && continue
+
+    echo "  removing $item"
+    rm -rf "$item"
+done
+
+# wipe public_html contents but keep pdf/ and png/ as empty directories
 if [ -d "$HOME/public_html" ]; then
+    echo "Cleaning public_html ..."
     find "$HOME/public_html" -mindepth 1 -maxdepth 1 \
         -not -name "pdf" \
         -not -name "png" \
-        -exec rm -rf {} +
+        -print -exec rm -rf {} +
     # ensure pdf and png dirs exist and are empty
     mkdir -p "$HOME/public_html/pdf" "$HOME/public_html/png"
-    find "$HOME/public_html/pdf" -mindepth 1 -exec rm -rf {} +
-    find "$HOME/public_html/png" -mindepth 1 -exec rm -rf {} +
+    find "$HOME/public_html/pdf" -mindepth 1 -print -exec rm -rf {} +
+    find "$HOME/public_html/png" -mindepth 1 -print -exec rm -rf {} +
 fi
 
 # ---------- copy config files ----------
@@ -70,7 +84,7 @@ cp -r "$CONFIG_DIR/utils"         "$HOME/utils"
 cp -r "$CONFIG_DIR/iec"           "$HOME/iec"
 
 # ---------- remove the config repo clone ----------
-echo "Removing config repo clone at $CONFIG_TOPLEVEL ..."
-rm -rf "$CONFIG_TOPLEVEL"
+echo "Removing config repo clone at $HOME_REAL/$CONFIG_TOPLEVEL ..."
+rm -rf "$HOME_REAL/$CONFIG_TOPLEVEL"
 
 echo "Done. Test account $TEST_USER has been reset."
