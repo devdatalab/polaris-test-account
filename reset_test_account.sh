@@ -94,3 +94,4 @@ if [ -d "$HOME_REAL/$CONFIG_TOPLEVEL" ]; then
 fi
 
 echo "Done. Test account $TEST_USER has been reset."
+echo "Run 'cd ~ && rmdir ~/polaris-test-account' to clean up."
